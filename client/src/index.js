@@ -15,7 +15,6 @@ import './assets/css/theme.css'
 import './assets/css/index.css'
 
 import Layout from './components/layout/Layout'
-import HomePage from './pages/Acceil/acceil';
 
 const store = createStore(
   rootReducer
