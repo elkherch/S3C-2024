@@ -14,7 +14,7 @@ class UserService {
 
     async getAllUsers() {
         try {
-            const users = await Users.findAll();
+            const users = await Users.find();
             return users;
         } catch (error) {
             console.error('Erreur :', error);

@@ -14,8 +14,6 @@ const userSchema = new mongoose.Schema({
         lowercase: true,
         validate: {
             validator: function(value) {
-                // Valider l'email
-                // Vous pouvez utiliser une expression régulière ou une bibliothèque de validation d'email
             }
         }
     },
