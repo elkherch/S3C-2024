@@ -20,8 +20,8 @@
         "icon": "bx bx-user-pin"
     },
     {
-        "display_name": "Orders",
-        "route": "/orders",
+        "display_name": "Challenges",
+        "route": "/challenges",
         "icon": "bx bx-cart"
     },
     {

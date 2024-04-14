@@ -7,7 +7,7 @@ export const fetchUsers = async () => {
     const response = await axios.get(`${API_BASE_URL}users/`);
     return response.data;
   } catch (error) {
-    console.error('Error fetching stations:', error);
+    console.error('Error fetching Users:', error);
     return [];
   }
 };
