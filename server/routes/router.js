@@ -1,65 +1,60 @@
-const userController = require('../controllers/userController');
-const teamsController = require('../controllers/teamController');
-const authController = require('../controllers/authController')
-const challengeController = require('../controllers/challengesController')
-const importExcelController = require('../utils/importExcel')
-const juryController = require('../controllers/JuryController')
-const router = require('express').Router();
-const envoyeEmail = require('../utils/send-email');
+const express = require('express');
+const router = express.Router();
 const multer = require('multer');
 const path = require('path');
 
-let filename = ''; // Définissez filename comme une variable let
+// Controllers
+const userController = require('../controllers/userController');
+const teamsController = require('../controllers/teamController');
+const authController = require('../controllers/authController');
+const challengeController = require('../controllers/challengesController'); // Fixed path if necessary
+const importExcelController = require('../utils/importExcel');
+const juryController = require('../controllers/juryController');
+const envoyeEmail = require('../utils/send-email');
 
-const mystorage = multer.diskStorage({
-  destination: './uploads',
-  filename: (req, file, cb) => {
-    let date = Date.now();
-    let fl = date + '.' + file.mimetype.split('/')[1];
-    cb(null, fl);
-    filename = fl;
-  }
-})
-
-const upload = multer({ storage: mystorage });
-
-router.get("/", (req, res, next) => {
-  res.send("Hello Hadrami")
+// Multer configuration
+const storage = multer.diskStorage({
+    destination: './uploads',
+    filename: function(req, file, cb) {
+        let ext = path.extname(file.originalname);
+        let filename = `${file.fieldname}-${Date.now()}${ext}`;
+        cb(null, filename);
+    }
 });
+const upload = multer({ storage: storage });
 
-router.get("/soumission", (req, res, next) => {
-  res.send("You can submit your work !");
-});
+// Basic routes
+router.get("/", (req, res) => res.send("Hello World"));
+router.get("/soumission", (req, res) => res.send("You can submit your work !"));
 
+// User routes
 router.get('/users', userController.getAllUsers);
 router.post('/users', userController.createUser);
 router.get('/users/:id', userController.getUserById);
 router.put('/users/:id', userController.updateUser);
 router.delete('/users/:id', userController.deleteUser);
 
+// Team routes
 router.get('/teams', teamsController.getAllTeams);
 router.post('/teams', teamsController.createTeams);
 router.get('/teams/:id', teamsController.getTeamsById);
 router.put('/teams/:id', teamsController.updateTeams);
 router.delete('/teams/:id', teamsController.deleteTeams);
 
+// Jury routes
 router.post("/jury/sendNotification", juryController.sendNotificationWithEmail);
 router.post("/jury/gradeTeamWork", juryController.gradeTeamWork);
 
+// Challenge routes
 router.get('/challenge', challengeController.getAllChallenges);
-router.post('/challenge', challengeController.createChallenges);
+router.post('/challenge', upload.single('file'), challengeController.createChallenges);
 router.get('/challenge/:id', challengeController.getChallengesById);
-router.put('/challenge/:id', challengeController.updateChallenges);
+router.put('/challenge/:id', upload.single('file'), challengeController.updateChallenges);
 router.delete('/challenge/:id', challengeController.deleteChallenges);
 
+// Authentication and import routes
 router.post('/login', authController.Login);
-
-router.post('/import-excel', upload.array('files'), (req, res) => {
-  const filePath = path.join(__dirname, '../uploads', filename);
-  console.log("3333333333333333333333333333333333333333", filePath)
-  importExcelController.importUsersFromExcel(filePath)
-});
-
+router.post('/import-excel', upload.array('files'), importExcelController.importUsersFromExcel);
 router.post('/send-email', envoyeEmail.EnvoyerEmail);
 
 module.exports = router;

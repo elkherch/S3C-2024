@@ -12,6 +12,23 @@ const teamSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
+    },
+    co_lead_user_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: false // Make it optional or required based on your needs
+    },
+    members: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }],
+    logo: {
+        type: String,
+        required: false 
+    },
+    club_name: {
+        type: String,
+        required: true
     }
 });
 

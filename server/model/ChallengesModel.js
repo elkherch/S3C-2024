@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const User = require('./UserModels'); // Assurez-vous d'importer correctement votre modèle d'utilisateur
+const User = require('./UserModels'); // Ensure your user model is correctly imported
 
 const challengeSchema = new mongoose.Schema({
     title: {
@@ -12,6 +12,10 @@ const challengeSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    fileUrl: {
+        type: String,
+        required: false 
+    },
     deadline: {
         type: Date,
         required: true
@@ -20,6 +24,16 @@ const challengeSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
+    },
+    organizer_email: {
+        type: String,
+        required: true,
+        validate: {
+            validator: function(v) {
+                return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v);
+            },
+            message: props => `${props.value} is not a valid email address!`
+        }
     }
 });
 
