@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals'
+import { BrowserRouter } from 'react-router-dom';
 
 import { createStore } from 'redux'
 
@@ -22,11 +23,14 @@ const store = createStore(
 document.title = 'Tua CRM'
 
 ReactDOM.render(
-  <Provider store={store}>
-    <React.StrictMode>
-      <Layout />
-    </React.StrictMode>
-  </Provider>,
+  <BrowserRouter>
+    <Provider store={store}>
+      <React.StrictMode>
+        <Layout />
+      </React.StrictMode>
+    </Provider>
+  </BrowserRouter>,
   document.getElementById('root')
 );
+
 reportWebVitals();
