@@ -30,6 +30,17 @@ async function getUserById(req, res) {
     res.status(500).json({ error: 'Erreur interne du serveur' });
   }
 }
+async function getUserByRole(req, res) {
+  // const role = req.params.role;
+  try {
+      const users = await userService.getUserByRole();
+      res.json(users);
+  } catch (error) {
+      console.error(`Erreur lors de la récupération des utilisateurs pour le rôle ${role} :`, error);
+      res.status(500).json({ error: 'Erreur interne du serveur' });
+  }
+}
+
 async function updateUser(req, res) {
   const userId = req.params.id;
   const userData = req.body;
@@ -56,5 +67,6 @@ module.exports = {
   createUser,
   getUserById,
   updateUser,
-  deleteUser
+  deleteUser,
+  getUserByRole
 };

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Table from '../../components/table/Table';
-import { fetchUsers } from '../../services/userServices/userservices';
-
+import { fetchUsers, deleteUser } from '../../services/userServices/userservices';
+import './jery.css'
 const customerTableHead = [
     '',
     'username',
@@ -13,25 +13,27 @@ const customerTableHead = [
 
 const renderHead = (item, index) => <th key={index}>{item}</th>;
 
-const renderBody = (item, index) => (
+const renderBody = (item, index , handleDelete) => (
     <tr key={index}>
         <td></td>
         <td>{item.username}</td>
         <td>{item.email}</td>
         <td>{item.level}</td>
         <td>{item.speciality}</td>
+        <td>
+            <button className='delete-jery' onClick={() => handleDelete(item._id)}>Delete</button>
+        </td>
     </tr>
 );
 
-const Etudiant = () => {
+const Jery = () => {
     const [customerList, setCustomerList] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await fetchUsers(); // Appel de la fonction fetchUsers
+                const data = await fetchUsers(); 
                 setCustomerList(data);
-                console.log(data)
             } catch (error) {
                 console.error('Error fetching users:', error);
             }
@@ -40,9 +42,19 @@ const Etudiant = () => {
         fetchData();
     }, []);
 
+    const handleDelete = async (userId) => {
+        try {
+            await deleteUser(userId);
+            const updatedUsers = customerList.filter(user => user._id !== userId);
+            setCustomerList(updatedUsers);
+        } catch (error) {
+            console.error('Error deleting user:', error);
+        }
+    };
+
     return (
         <div>
-            <h2 className="page-header">Etudiant</h2>
+            <h2 className="page-header">Jery</h2>
             <div className="row">
                 <div className="col-12">
                     <div className="card">
@@ -52,7 +64,7 @@ const Etudiant = () => {
                                 headData={customerTableHead}
                                 renderHead={(item, index) => renderHead(item, index)}
                                 bodyData={customerList}
-                                renderBody={(item, index) => renderBody(item, index)}
+                                renderBody={(item, index) => renderBody(item, index , handleDelete)}
                             />
                         </div>
                     </div>
@@ -62,4 +74,4 @@ const Etudiant = () => {
     );
 };
 
-export default Etudiant;
+export default Jery;

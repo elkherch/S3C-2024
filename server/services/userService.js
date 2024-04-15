@@ -34,6 +34,19 @@ class UserService {
             throw error;
         }
     }
+    async getUserByRole() {
+        try {
+            const users = await Users.find({ role: 'jery' });
+            if (users.length === 0) {
+                throw new Error('Aucun utilisateur trouvé avec ce rôle');
+            }
+            return users;
+        } catch (error) {
+            console.error(`Erreur lors de la récupération des utilisateurs pour le rôle ${role} :`, error);
+            throw error;
+        }
+    }
+    
 
     async updateUser(userId, userData) {
         try {
@@ -51,17 +64,17 @@ class UserService {
 
     async deleteUser(userId) {
         try {
-            const user = await Users.findByPk(userId);
-            if (!user) {
+            const user = await Users.deleteOne({ _id: userId });
+            if (user.deletedCount === 0) {
                 throw new Error('Utilisateur non trouvé');
             }
-            await user.destroy();
             return user;
         } catch (error) {
             console.error(`Erreur ${userId} :`, error);
             throw error;
         }
     }
+    
 
     async authenticate(username, password) {
         try {
