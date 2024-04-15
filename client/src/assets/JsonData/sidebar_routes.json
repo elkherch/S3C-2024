@@ -14,11 +14,7 @@
         "route": "/equipe",
         "icon": "bx bx-user-pin"
     },
-    {
-        "display_name": "Jurys",
-        "route": "/customers",
-        "icon": "bx bx-user-pin"
-    },
+    
     {
         "display_name": "Challenges",
         "route": "/challenges",

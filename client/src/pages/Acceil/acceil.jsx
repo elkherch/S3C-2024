@@ -24,7 +24,7 @@ const Navbar = () => (
                     <Link to="/" className="nav-link home"><i className="fas fa-house"></i>Accueil</Link>
                 </li>
                 <li className="nav-item">
-                    <Link to="/formulaire" className="nav-link home"><i className="fas fa-pencil-alt"></i>Formulaire de participation</Link>
+                    <Link to="/participer_challenge" className="nav-link home"><i className="fas fa-pencil-alt"></i>Formulaire de participation</Link>
                 </li>
                 <li className="nav-item">
                     <Link to="/classement" className="nav-link home"><i className="fas fa-trophy"></i>Classement</Link>
