@@ -5,7 +5,7 @@ const API_BASE_URL = 'http://localhost:3000/';
 // Récupérer toutes les équipes
 export const fetchTeams = async () => {
     try {
-        const response = await axios.get(`${API_BASE_URL}teams/`);
+        const response = await axios.get(`${API_BASE_URL}teams`);
         return response.data;
     } catch (error) {
         console.error('Error fetching teams:', error);

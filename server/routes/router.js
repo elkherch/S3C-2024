@@ -49,14 +49,14 @@ router.post("/jury/gradeTeamWork", juryController.gradeTeamWork);
 
 // Challenge routes
 router.get('/challenge', challengeController.getAllChallenges);
-router.post('/challenge', challengeController.upload.single('file'), challengeController.createChallenges);
+router.post('/challenge', teamsController.upload, challengeController.createChallenges);
 router.get('/challenge/:id', challengeController.getChallengesById);
-router.put('/challenge/:id', challengeController.upload.single('file'), challengeController.updateChallenges);
+router.put('/challenge/:id', teamsController.upload, challengeController.updateChallenges);
 router.delete('/challenge/:id', challengeController.deleteChallenges);
 
 // Authentication and import routes
 router.post('/login', authController.Login);
-router.post('/import-excel', challengeController.upload.array('files'), importExcelController.importUsersFromExcel);
+// router.post('/import-excel', challengeController.upload.array('files'), importExcelController.importUsersFromExcel);
 router.post('/send-email', envoyeEmail.sendEmail);
 
 module.exports = router;

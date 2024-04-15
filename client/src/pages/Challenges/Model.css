@@ -50,3 +50,9 @@
 .close-btn:hover {
     color: #000;
 }
+.btn-challenge {
+    width: 100px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+  
