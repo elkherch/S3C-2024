@@ -19,13 +19,11 @@
     background-color: #eee; /* Couleur de fond de la partie inférieure de la barre de navigation */
 }
 
-.navbar-nav {
-    /* Styles pour la liste de navigation */
-}
 
 .logoIP {
-    background-image: url('../assets/images/back.png');
+    background-image: url('../assets/images/cards.png');
     border: 1px solid #E0E0E0;
+    height: 100px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     padding: 96px;

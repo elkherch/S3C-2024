@@ -1,13 +1,17 @@
 .post-card {
-    background: #FFFFFF;
-    border: 1px solid #E0E0E0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    padding: 16px;
-    margin-left: 100px;
-    margin-right: 100px;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    background: #031b3f; /* Strong blue that's almost black */
+    border: 1px solid #B6B6B6; /* Lighter border for contrast */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Deeper shadow for depth */
+    border-radius: 10px;
+    padding: 20px;
+    margin: 40px auto; /* Centering the card horizontally */
+    color: #FFFFFF; /* Making text color white */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transformations on hover */
+}
+
+.post-card:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Increasing shadow on hover */
 }
 
 .post-card-header {
@@ -17,52 +21,142 @@
 }
 
 .post-card-profile-pic {
-    width: 50px;
-    height: 50px;
+    width: 60px; /* Slightly larger profile pic */
+    height: 60px;
     border-radius: 50%;
-    margin-right: 8px;
+    margin-right: 12px;
+    border: 3px solid #FFFFFF; /* White border around the profile picture */
 }
 
 .post-card-author-name {
     font-weight: bold;
+    font-size: 1.1rem; /* Larger font size for better readability */
 }
 
 .post-card-date {
-    font-size: 0.8rem;
-    color: #757575;
+    font-size: 0.9rem; /* Slightly larger than before */
+    opacity: 0.75; /* Making the date less prominent */
 }
 
 .post-card-content {
-    margin-top: 16px;
+    margin-top: 20px;
+    font-size: 1rem; /* Ensuring readability */
+    line-height: 1.5; /* Improving line spacing */
 }
 
 .post-card-action {
     background: none;
     border: none;
-    color: #5E35B1;
+    color: #B39DDB; /* Light purple to stand out but not overpower */
     cursor: pointer;
-}
-.post-card-comment-input {
-    width: calc(100% - 40px); /* Prend toute la largeur moins celle du bouton */
     padding: 8px;
-    margin-right: 8px; /* Espace entre l'input et le bouton */
-    border: 1px solid #E0E0E0;
-    border-radius: 4px;
+    transition: color 0.2s ease; /* Smooth color transition on hover */
+}
+
+.post-card-action:hover {
+    color: #7E57C2; /* Darker purple on hover */
+}
+
+.post-card-comment-input {
+    width: calc(100% - 48px); /* Adjusting width to better fit next to button */
+    padding: 10px;
+    margin-right: 8px;
+    border: 2px solid #FFFFFF; /* White border for visibility */
+    border-radius: 0px;
 }
 
 .post-card-submit-comment {
-    background-color: #4CAF50; /* ou toute autre couleur que vous préférez */
+    background-color: #1E88E5; /* Vivid blue button */
     border: none;
-    padding: 8px;
-    border-radius: 4px;
+    padding: 10px 16px;
+    border-radius: 0px;
     color: white;
     cursor: pointer;
+    transition: background-color 0.2s; /* Smooth background color transition */
 }
 
 .post-card-submit-comment:hover {
-    background-color: #45a049; /* Effet au survol */
+    background-color: #1565C0; /* Darker blue on hover */
+}
+.post-card {
+    background: #031b3f; /* Deep, almost black blue */
+    border: 1px solid #B6B6B6; /* Subtle contrast border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25); /* Slightly more refined shadow for depth */
+    border-radius: 8px;
+    padding: 16px; /* Reduced padding for a smaller profile */
+    margin: 30px auto; /* Reduced margin for closer spacing */
+    color: #FFFFFF; /* Retained white text for contrast */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions for interactive effects */
+    width: 100%; /* Setting max-width for responsive design */
+    max-width: 800px; /* Smaller maximum width for a more compact layout */
 }
 
-/* Ajoutez plus de styles en fonction de vos besoins */
+.post-card:hover {
+    transform: translateY(-3px); /* Subtle lift effect */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35); /* Deeper shadow on hover */
+}
 
-/* Ajoutez plus de styles en fonction de vos besoins */
+.post-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-card-profile-pic {
+    width: 50px; /* Reducing size for a more compact look */
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px; /* Slightly less margin for tight spacing */
+    border: 2px solid #FFFFFF; /* Retained the stylish white border */
+}
+
+.post-card-author-name {
+    font-weight: 600; /* Bold, but slightly less heavy */
+    font-size: 1rem; /* Smaller font size for a more proportional look */
+}
+
+.post-card-date {
+    font-size: 0.8rem; /* Smaller font for subtlety */
+    opacity: 0.8; /* Slightly clearer than before */
+}
+
+.post-card-content {
+    margin-top: 16px;
+    font-size: 0.95rem; /* Slightly smaller for compactness */
+    line-height: 1.4; /* Adjusted line spacing for readability */
+}
+
+.post-card-action {
+    background: none;
+    border: none;
+    color: #B39DDB; /* Retained light purple */
+    cursor: pointer;
+    padding: 8px;
+    transition: color 0.2s ease; /* Smooth color transition */
+}
+
+.post-card-action:hover {
+    color: #7E57C2; /* Darker purple on hover */
+}
+
+.post-card-comment-input {
+    width: calc(100% - 52px); /* Adjusted width to better align with smaller button size */
+    padding: 8px;
+    margin-right: 8px;
+    border: 1px solid #FFFFFF; /* Slightly thinner border for a refined look */
+    border-radius: 4px; /* Restored rounded corners for a softer look */
+}
+
+.post-card-submit-comment {
+    background-color: #1E88E5; /* Vivid blue button */
+    border: none;
+    padding: 8px 12px; /* Smaller padding for a more proportional button */
+    border-radius: 4px; /* Consistent rounded corners */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s; /* Smooth transition */
+}
+
+.post-card-submit-comment:hover {
+    background-color: #1565C0; /* Darker blue on hover */
+}
