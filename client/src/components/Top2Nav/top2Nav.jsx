@@ -18,7 +18,7 @@ const NavbarTop2 = () => (
                     <Link to="/team" className="nav-link home"><i className="fas fa-house"></i>Accueil</Link>
                 </li>
                 <li className="nav-item">
-                    <Link to="/travon" className="nav-link home"><i className="fas fa-pencil-alt"></i>traveuu et devoir</Link>
+                    <Link to="/travon" className="nav-link home"><i className="fas fa-pencil-alt"></i>traveaux et devoirs</Link>
                 </li>
                 <li className="nav-item">
                     <Link to="/personne" className="nav-link home"><i className="fas fa-trophy"></i>personne</Link>
