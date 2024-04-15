@@ -23,7 +23,7 @@ const challengeSchema = new mongoose.Schema({
     organizer_user_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: true
+        required: false
     },
     organizer_email: {
         type: String,

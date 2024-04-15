@@ -219,6 +219,8 @@ const LaodingPage = () => {
   );
 };
 const FormSection = () => {
+  const [logo, setLogo] = useState(null);
+
   const [teamData, setTeamData] = useState({
     team_name: '',
     slogan: '',
@@ -238,20 +240,30 @@ const FormSection = () => {
   };
 
   const handleSave = async (event) => {
-    event.preventDefault(); // Prevent default form submission behavior
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append('team_name', teamData.team_name);
+    formData.append('slogan', teamData.slogan);
+    formData.append('leader_email', teamData.leader_email);
+    formData.append('co_leader_email', teamData.co_leader_email);
+    formData.append('logo', logo);  
+    teamData.member_emails.forEach((email, index) => {
+        formData.append(`member_emails[${index}]`, email);
+    });
+
     try {
-      if (!teamData.team_name.trim() || !teamData.slogan.trim() || !teamData.leader_email.trim()) {
-        alert("Please fill in all required fields.");
-        return;
-      }
-      const response = await axios.post('http://localhost:3000/teams/', teamData);
-      if (response.status === 201 || response.status === 200) {
-        console.log('Team added:', response.data);
-      } else {
-        console.error("Failed to add team:", response.statusText);
-      }
+        const response = await axios.post('http://localhost:3000/teams/', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        if (response.status === 201 || response.status === 200) {
+            console.log('Team added:', response.data);
+        } else {
+            console.error("Failed to add team:", response.statusText);
+        }
     } catch (error) {
-      console.error("Error adding team:", error);
+        console.error("Error adding team:", error);
     }
   };
   return (
@@ -282,10 +294,10 @@ const FormSection = () => {
               placeholder="Entrez votre devise" required />
             </Form.Group>
 
-            {/* <Form.Group className="mb-3">
+            <Form.Group className="mb-3">
               <Form.Label>Logo</Form.Label>
-              <Form.Control type="file" accept="image/*" />
-            </Form.Group> */}
+              <Form.Control type="file" accept="image/*" onChange={(e) => setLogo(e.target.files[0])}/>
+            </Form.Group>
 
             <Form.Group className="mb-3">
               <Form.Label>Chef d'équipe</Form.Label>
