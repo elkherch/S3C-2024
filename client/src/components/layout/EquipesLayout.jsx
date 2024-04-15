@@ -1,15 +1,14 @@
 import React from 'react';
-import TopNav from '../topnav/TopNav';
 import NavbarTop2 from '../Top2Nav/top2Nav';
-
-const AcceuilLayout = ({ children }) => {
+const EquipesLayout = ({ children }) => {
     return (
-
+        <div>
+            <NavbarTop2 /> {/* Ajouter la barre de navigation ici */}
             <div className="content">
                 {children}
             </div>
-
+        </div>
     );
 };
 
-export default AcceuilLayout;
+export default EquipesLayout;

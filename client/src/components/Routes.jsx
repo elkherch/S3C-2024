@@ -12,6 +12,9 @@ import Challenges from '../pages/Challenges/Challenges';
 import Participer_challenge from '../pages/Particuper_au_challenges/particuper_au_challenge';
 import Teams from '../pages/Teams/Teams';
 import Jery from '../pages/Jery/Jery';
+import EquipesLayout from './layout/EquipesLayout';
+import TravonDevoir from '../pages/Travon_Devoir/devoir';
+import ListeMembres from '../pages/ListeMembresEquipe/listemembreEquipe';
 
 const Routes = () => {
     return (
@@ -27,12 +30,21 @@ const Routes = () => {
                         <Login />
                     </LoginLayout>
                 </Route>
-                <Route path='/team' exact>
-                    <LoginLayout>
-                        <Dashboardteam />
-                    </LoginLayout>
+                <Route path='/travon' exact>
+                    <EquipesLayout>
+                        <TravonDevoir />
+                    </EquipesLayout>
                 </Route>
-                
+                <Route path='/personne' exact>
+                    <EquipesLayout>
+                        <ListeMembres />
+                    </EquipesLayout>
+                </Route>
+                <Route path='/team' exact>
+                    <EquipesLayout>
+                        <Dashboardteam />
+                    </EquipesLayout>
+                </Route>
                 <Route path='/dashboard' exact>
                     <AdminLayout>
                         <Dashboard />

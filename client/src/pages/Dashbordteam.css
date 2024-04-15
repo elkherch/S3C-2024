@@ -4,11 +4,13 @@
 }
 
 .navbar-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #333; /* Couleur de fond de la barre de navigation */
-    padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #010142;
+        height: 70px;
+        padding: 5px 10px;
+    
 }
 
 .navbar-bottom {
