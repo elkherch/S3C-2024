@@ -24,7 +24,7 @@
 .text-container {
     display: flex;
     margin-top: 50px;
-    margin: auto;
+    /* margin: auto; */
     align-items: center; /* Centrage vertical */
     justify-content: center; /* Centrage horizontal */
     position: relative;
@@ -37,7 +37,7 @@
 
 .text-container h1 {
     color: #020232;
-    font-size: 44px;
+    font-size: 24px;
     display: inline-block;
     position: relative;
 }
@@ -215,3 +215,103 @@ a.btnn {
     background-color: rgba(0, 0, 0, 0.5); /* Couleur d'arrière-plan avec opacité */
     z-index: 0;
 }
+.image {
+    background-size: cover;
+    background-position: center;
+    padding: 50px 10px;
+    color: #fff;
+    text-align: center;
+  }
+  
+  .flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1300px;
+    margin: 10 auto;
+  }
+  
+  .text1-container,
+  .form-container {
+    flex: 1;
+  }
+  
+  .text-title {
+    margin-bottom: 20px;
+  }
+  
+  .text-title p {
+    font-size: 16px;
+    color: #000;
+  }
+  .text-title a{
+    color: blue;
+  }
+  
+  .text-title p {
+    font-size: 18px;
+  }
+  
+  form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  form h4 {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+  
+  form label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  form input[type="text"],
+  form input[type="date"],
+  form input[type="number"],
+  form input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  form input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  form input[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  .kh {
+    display: flex;
+    justify-content: space-between;
+  }
+  .arc-separator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px; /* Hauteur de votre arc */
+    overflow: hidden;
+    line-height: 0;
+  }
+  
+  .arc-separator svg {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .arc-separator path {
+    fill: #007bff; /* Couleur du fond bleu */
+  }
+  
