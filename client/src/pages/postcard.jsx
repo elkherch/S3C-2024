@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './postcard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-const PostCard = ({ author, date, content }) => {
+const PostCard = ({ author, date, content ,fileUrl}) => {
     const [comment, setComment] = useState('');
 
     const handleCommentChange = (event) => {
@@ -40,8 +40,8 @@ const PostCard = ({ author, date, content }) => {
                     onChange={handleCommentChange}
                 />
                 <button onClick={submitComment}>
-    <FontAwesomeIcon icon={faArrowRight} />
-</button>
+               <FontAwesomeIcon icon={faArrowRight} />
+              </button>
             </div>
         </div>
     );
