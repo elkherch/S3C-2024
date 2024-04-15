@@ -18,22 +18,12 @@
     {
         "display_name": "Challenges",
         "route": "/challenges",
-        "icon": "bx bx-cart"
+        "icon": "bx bx-envelope-open"
     },
     {
-        "display_name": "discount",
-        "route": "/discount",
-        "icon": "bx bx-gift"
-    },
-    {
-        "display_name": "inventory",
-        "route": "/inventory",
-        "icon": "bx bx-store-alt"
-    },
-    {
-        "display_name": "settings",
-        "route": "/settings",
-        "icon": "bx bx-cog"
+        "display_name": "Evaluations",
+        "route": "/evaluation",
+        "icon": "bx bx-calendar-event"
     }
     
 ]
