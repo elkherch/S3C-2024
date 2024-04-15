@@ -6,6 +6,7 @@ import LoginLayout from './layout/LoginLayout';
 import HomePage from '../pages/Acceil/acceil';
 import Login from '../pages/Login/login';
 import Dashboard from '../pages/Dashboard';
+import Dashboardteam from '../pages/Dashbordteams'
 import Etudiant from '../pages/Etudiants/Etudiants';
 import Challenges from '../pages/Challenges/Challenges';
 import Participer_challenge from '../pages/Particuper_au_challenges/particuper_au_challenge';
@@ -22,6 +23,11 @@ const Routes = () => {
                 <Route path='/login' exact>
                     <LoginLayout>
                         <Login />
+                    </LoginLayout>
+                </Route>
+                <Route path='/team' exact>
+                    <LoginLayout>
+                        <Dashboardteam />
                     </LoginLayout>
                 </Route>
                 

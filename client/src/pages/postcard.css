@@ -1,0 +1,65 @@
+.post-card {
+    background: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: 16px;
+    padding: 16px;
+}
+
+.post-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-card-profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.post-card-author-name {
+    font-weight: bold;
+}
+
+.post-card-date {
+    font-size: 0.8rem;
+    color: #757575;
+}
+
+.post-card-content {
+    margin-top: 16px;
+}
+
+.post-card-action {
+    background: none;
+    border: none;
+    color: #5E35B1;
+    cursor: pointer;
+}
+.post-card-comment-input {
+    width: calc(100% - 40px); /* Prend toute la largeur moins celle du bouton */
+    padding: 8px;
+    margin-right: 8px; /* Espace entre l'input et le bouton */
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+}
+
+.post-card-submit-comment {
+    background-color: #4CAF50; /* ou toute autre couleur que vous préférez */
+    border: none;
+    padding: 8px;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+}
+
+.post-card-submit-comment:hover {
+    background-color: #45a049; /* Effet au survol */
+}
+
+/* Ajoutez plus de styles en fonction de vos besoins */
+
+/* Ajoutez plus de styles en fonction de vos besoins */
