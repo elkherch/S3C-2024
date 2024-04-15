@@ -1,13 +1,40 @@
 const Teams = require('../model/TeamsModel');
-
+const ErrorHandler = require('../ErrorHandler')
 class TeamService {
+    async  emailAlreadyUsed(email, excludeTeamId = null) {
+        const query = {
+            $or: [
+                { leader_email: email },
+                { co_leader_email: email },
+                { member_emails: email }
+            ]
+        };
+        if (excludeTeamId) {
+            query._id = { $ne: excludeTeamId };  // Exclure l'ID d'une équipe en particulier de la recherche (utile pour la mise à jour)
+        }
+        const team = await Teams.findOne(query);
+        return !!team;  // Renvoie true si un email est déjà utilisé, false autrement
+    }
+    
     async createTeams(teamData) {
         try {
-            const teams = await Teams.create(teamData);
-            return teams;
+            if (await this.emailAlreadyUsed(teamData.leader_email)) {
+                throw new ErrorHandler('L\'email du leader est déjà utilisé par une autre équipe', 400);
+            }
+            if (teamData.co_leader_email && await this.emailAlreadyUsed(teamData.co_leader_email)) {
+                throw new ErrorHandler('L\'email du co-leader est déjà utilisé par une autre équipe', 400);
+            }
+            for (const email of teamData.member_emails) {
+                if (await this.emailAlreadyUsed(email)) {
+                    throw new ErrorHandler(`L\'email du membre ${email} est déjà utilisé par une autre équipe`, 400);
+                }
+            }
+    
+            const team = await Teams.create(teamData);
+            return team;
         } catch (error) {
             console.error('Erreur lors de la création de l\'équipe :', error);
-            throw error;
+            throw error;  // Propager l'erreur pour être gérée plus haut dans la stack
         }
     }
 
@@ -38,7 +65,7 @@ class TeamService {
         try {
             const team = await Teams.findByIdAndUpdate(teamId, teamData, { new: true });
             if (!team) {
-                throw new Error('Équipe non trouvée');
+                return { message: 'Équipe non trouvée' };
             }
             return team;
         } catch (error) {

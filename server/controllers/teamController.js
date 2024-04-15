@@ -1,5 +1,4 @@
 const teamService = require('../services/teamService');
-
 async function getAllTeams(req, res) {
   try {
     const teams = await teamService.getAllTeams();
@@ -15,10 +14,10 @@ async function createTeams(req, res) {
     const teamsData = req.body;
     
     const team = await teamService.createTeams(teamsData);
-    res.status(201).json(team);
+    res.json(result);
   } catch (error) {
-    console.error('Error creating team:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    console.error('Erreur lors de la création :', error);
+    res.status(error.statusCode || 500).json({ message: error.message });
   }
 }
 
