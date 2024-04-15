@@ -337,7 +337,6 @@ const FormSection = () => {
     </Container>
   </section>);
 };
-
 const RankingSection = () => (
     <section id="classement" className="ranking-section text-center">
       <Container>

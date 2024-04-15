@@ -18,12 +18,14 @@ class TeamService {
     
     async createTeams(teamData) {
         try {
-            if (await this.emailAlreadyUsed(teamData.leader_email)) {
-                throw new ErrorHandler('L\'email du leader est déjà utilisé par une autre équipe', 400);
+            if (!Array.isArray(teamData.member_emails)) {
+                throw new ErrorHandler('Member emails should be an array', 400);
             }
+    
             if (teamData.co_leader_email && await this.emailAlreadyUsed(teamData.co_leader_email)) {
                 throw new ErrorHandler('L\'email du co-leader est déjà utilisé par une autre équipe', 400);
             }
+    
             for (const email of teamData.member_emails) {
                 if (await this.emailAlreadyUsed(email)) {
                     throw new ErrorHandler(`L\'email du membre ${email} est déjà utilisé par une autre équipe`, 400);
@@ -34,9 +36,10 @@ class TeamService {
             return team;
         } catch (error) {
             console.error('Erreur lors de la création de l\'équipe :', error);
-            throw error;  // Propager l'erreur pour être gérée plus haut dans la stack
+            throw error;
         }
     }
+    
 
     async getAllTeams() {
         try {
