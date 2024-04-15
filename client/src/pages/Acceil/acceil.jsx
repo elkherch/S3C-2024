@@ -22,6 +22,15 @@ const Navbar = () => (
                     <Link to="/" className="nav-link home"><i className="fas fa-house"></i>Accueil</Link>
                 </li>
                 <li className="nav-item">
+                    <Link to="/formulaire" className="nav-link home"><i className="fas fa-pencil-alt"></i>Formulaire de participation</Link>
+                </li>
+                <li className="nav-item">
+                    <Link to="/classement" className="nav-link home"><i className="fas fa-trophy"></i>Classement</Link>
+                </li>
+                <li className="nav-item">
+                    <Link to="/about" className="nav-link home"><i className="fas fa-info-circle"></i>À propos</Link>
+                </li>
+                <li className="nav-item">
                     <Link to="/login" className="nav-link home"><i className="fa-solid fa-right-to-bracket"></i>Connexion</Link>
                 </li>
             </ul>
@@ -83,7 +92,7 @@ const Footer = () => (
     </footer>
 );
 
-const HomePage = () => {
+const LaodingPage = () => {
     useEffect(() => {
         const typed = new Typed('#typed-text', {
             strings: ["Bienvenue<br>Sur la Plateforme Supnum 3C"],
@@ -111,4 +120,4 @@ const HomePage = () => {
     );
 };
 
-export default HomePage;
+export default LaodingPage;

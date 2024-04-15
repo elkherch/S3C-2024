@@ -15,6 +15,7 @@ import './assets/css/theme.css'
 import './assets/css/index.css'
 
 import Layout from './components/layout/Layout'
+import LandingPage from './pages/Acceil/acceil';
 
 const store = createStore(
   rootReducer
@@ -26,7 +27,7 @@ ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
       <React.StrictMode>
-        <Layout />
+        <LandingPage />
       </React.StrictMode>
     </Provider>
   </BrowserRouter>,
