@@ -252,7 +252,7 @@ const FormSection = () => {
     });
 
     try {
-        const response = await axios.post('http://localhost:3000/teams/', formData, {
+        const response = await axios.post('http://207.154.204.200:3000/teams/', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
