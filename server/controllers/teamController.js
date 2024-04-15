@@ -12,9 +12,13 @@ async function getAllTeams(req, res) {
 async function createTeams(req, res) {
   try {
     const teamsData = req.body;
-    
+    if (req.file) {
+      // Here, you might want to store the file in a more permanent location or in cloud storage
+      // and then set the URL to teamData.logo
+      teamsData.logo = req.file.path;  // This path might need adjustment depending on your storage strategy
+  }
     const team = await teamService.createTeams(teamsData);
-    res.json(result);
+    res.json(team);
   } catch (error) {
     console.error('Erreur lors de la création :', error);
     res.status(error.statusCode || 500).json({ message: error.message });

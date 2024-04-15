@@ -9,7 +9,8 @@ const challengeController = require('../controllers/challengesController'); // F
 const importExcelController = require('../utils/importExcel');
 const juryController = require('../controllers/juryController');
 const envoyeEmail = require('../utils/send-email');
-
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
 // Multer configuration
 
 const jwtCheck = auth({
@@ -37,7 +38,7 @@ router.delete('/users/:id', userController.deleteUser);
 
 // Team routes
 router.get('/teams', teamsController.getAllTeams);
-router.post('/teams',teamsController.upload, teamsController.createTeams);
+router.post('/teams', upload.single('logo'), teamsController.createTeams);
 router.get('/teams/:id', teamsController.getTeamsById);
 router.put('/teams/:id', teamsController.updateTeams);
 router.delete('/teams/:id', teamsController.deleteTeams);
