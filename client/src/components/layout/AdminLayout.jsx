@@ -3,6 +3,7 @@ import Sidebar from '../sidebar/Sidebar';
 import TopNav from '../topnav/TopNav';
 import { useSelector, useDispatch } from 'react-redux';
 import { Route} from 'react-router-dom';
+import './layout.css'
 import ThemeAction from '../../redux/actions/ThemeAction';
 const AdminLayout = ({ children }) => {
     const themeReducer = useSelector((state) => state.ThemeReducer);
