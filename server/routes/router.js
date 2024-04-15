@@ -9,6 +9,8 @@ const challengeController = require('../controllers/challengesController'); // F
 const importExcelController = require('../utils/importExcel');
 const juryController = require('../controllers/juryController');
 const envoyeEmail = require('../utils/send-email');
+const {response} = require("express");
+const passport = require("passport")
 
 // Multer configuration
 
@@ -57,5 +59,14 @@ router.delete('/challenge/:id', challengeController.deleteChallenges);
 router.post('/login', authController.Login);
 router.post('/import-excel', challengeController.upload.array('files'), importExcelController.importUsersFromExcel);
 router.post('/send-email', envoyeEmail.sendEmail);
+router.get('/auth/google',
+    passport.authenticate('google', { scope: ['profile','email'] }));
+
+router.get('/auth/google/callback',
+    passport.authenticate('google', { failureRedirect: 'http://localhost:3000/login' }),
+    function(req, res) {
+        // Successful authentication, redirect home.
+        res.redirect('http://localhost:3000');
+    });
 
 module.exports = router;

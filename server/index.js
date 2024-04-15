@@ -5,8 +5,10 @@ const dotenv = require("dotenv");
 const connectToDatabase = require("./config/connect.js");
 const MongoStore = require("connect-mongo");
 const router = require("./routes/router.js");
+const googleAuth = require("./routes/router")
 const crypto = require('crypto');
 const mongoose = require('mongoose');
+const passport = require("passport")
 
 dotenv.config();
 
@@ -35,6 +37,11 @@ app.use(session({
     maxAge: 1000 * 60 * 60 * 24, // 1 day
   },
 }));
+
+app.use(passport.initialize());
+require("./auth/google-auth")(passport);
+
+app.use("/", googleAuth)
 
 app.use(router);
 
