@@ -4,6 +4,8 @@
 import React, { useEffect } from 'react';
 import Typed from 'typed.js';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Container, Button, Row,Col,Card} from 'react-bootstrap';
+
 import './acceil.css';
 
 
@@ -29,6 +31,9 @@ const Navbar = () => (
                 </li>
                 <li className="nav-item">
                     <Link to="/about" className="nav-link home"><i className="fas fa-info-circle"></i>À propos</Link>
+                </li>
+                <li className="nav-item">
+                    <Link to="/contact" className="nav-link home"><i className="fas fa-envelope"></i>Contacter-nous</Link>
                 </li>
                 <li className="nav-item">
                     <Link to="/login" className="nav-link home"><i className="fa-solid fa-right-to-bracket"></i>Connexion</Link>
@@ -91,33 +96,83 @@ const Footer = () => (
         </div>
     </footer>
 );
-
-const LaodingPage = () => {
-    useEffect(() => {
-        const typed = new Typed('#typed-text', {
-            strings: ["Bienvenue<br>Sur la Plateforme Supnum 3C"],
-            typeSpeed: 65,
-            backSpeed: 65,
-            loop: true,
-            smartBackspace: true,
-            onComplete: function (self) {
-                self.cursor.remove();
-            }
-        });
-        return () => {
-            typed.destroy();
-        };
-    }, []);
-
-    return (
-        <div className="container center-content">
-            <Navbar /> {/* Utilisez simplement Navbar ici */}
-            <div className="card-body">
-                <Countdown date="2023-12-31" />
+const ImageSection = () => (
+    <section className="image text-center">
+      <Container>
+        <div className="flex-container">
+          <div className="text1-container">
+            <div className='text-title'>
+            <p>SupNum 3C Rejoignez la compétition incontoumable du mois de Ramadan dédiée aux étudiants de L2 et 3 en informatique.          Préparez-vous pour une série de défis couvrant différents domaines tels que le développement web et mobile,
+              les bases de données, la complexité et la structure de données, la sécurité, la conception et le design, etc..</p>
+            <a href="#">Cliquez ici pour Participer</a> 
             </div>
-            <TextContainer />
+          </div>
+          <div className="form-container">
+            <form>
+              <h4>Quel est votre Trajet ?</h4>
+              <hr />
+              <label>Ville depart :</label>
+              <input type="text" required></input>
+              <label>Destination:</label>
+              <input type="text" required></input>
+              <div className="kh">
+                <div>
+                  <label>Date depart:</label>
+                  <input type="date" required></input>
+                </div>
+                <div>
+                  <label>Nombre Place:</label>
+                  <input type="number" required></input>
+                </div>
+              </div>
+              <input type="submit" value="Recherche"></input>
+            </form>
+          </div>
         </div>
-    );
-};
+      </Container>
+    </section>
+  );
 
-export default LaodingPage;
+  
+  const LaodingPage = () => {
+      useEffect(() => {
+          const typed = new Typed('#typed-text', {
+              strings: ["Comité d’organisation du championnat SupNum <br>Coding Challenge Championship’2024 (S3C’2024)"],
+              typeSpeed: 65,
+              backSpeed: 65,
+              loop: true,
+              smartBackspace: true,
+              onComplete: function (self) {
+                  self.cursor.remove();
+              }
+          });
+          return () => {
+              typed.destroy();
+          };
+      }, []);
+  
+      return (
+          <div className="container center-content landing-page">
+              <Navbar />
+              <div className="card-body">
+                  <Countdown date="2023-12-31" />
+              </div>
+              <TextContainer />
+              <ImageSection />
+              <section className="video">
+  <h2>Vidéo promotionnelle</h2>
+  <div className="video-container">
+    <iframe
+      src="https://www.youtube.com/embed/AmdIUZ_fTBs"
+      title="YouTube video"
+      allowFullScreen
+    ></iframe>
+  </div>
+</section>
+
+          </div>
+      );
+  };
+  
+  export default LaodingPage;
+  
