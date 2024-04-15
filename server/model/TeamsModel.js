@@ -22,6 +22,7 @@ const teamSchema = new mongoose.Schema({
     },
     member_emails: [{
         type: String,
+        required: false,
         validate: [emailValidator, 'Please fill a valid email address']
     }],
     slogan: {

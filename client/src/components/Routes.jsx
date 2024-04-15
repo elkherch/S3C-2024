@@ -15,6 +15,7 @@ import Jery from '../pages/Jery/Jery';
 import EquipesLayout from './layout/EquipesLayout';
 import TravonDevoir from '../pages/Travon_Devoir/devoir';
 import ListeMembres from '../pages/ListeMembresEquipe/listemembreEquipe';
+import Evaluations from '../pages/Evaluations/evaluations';
 
 const Routes = () => {
     return (
@@ -65,10 +66,10 @@ const Routes = () => {
                         <Teams />
                     </AdminLayout>
                 </Route>
-                <Route path='/participer_challenge'>
-                    <AcceuilLayout>
-                        <Participer_challenge />
-                    </AcceuilLayout>
+                <Route path='/evaluation'>
+                    <AdminLayout>
+                        <Evaluations />
+                    </AdminLayout>
                 </Route>
             </Switch>
         </Router>
