@@ -6,8 +6,6 @@ const customerTableHead = [
     '',
     'username',
     'email',
-    'level',
-    'speciality',
     'Actions'
 ];
 
@@ -18,8 +16,6 @@ const renderBody = (item, index , handleDelete) => (
         <td></td>
         <td>{item.username}</td>
         <td>{item.email}</td>
-        <td>{item.level}</td>
-        <td>{item.speciality}</td>
         <td>
             <button className='delete-jery' onClick={() => handleDelete(item._id)}>Delete</button>
         </td>

@@ -1,22 +1,22 @@
 [
     {
-        "icon": "bx bx-shopping-bag",
-        "count": "1,995",
-        "title": "Total sales"
+        "icon": "bx bx-group",
+        "count": "12",
+        "title": "les equipes"
     },
     {
-        "icon": "bx bx-cart",
-        "count": "2,001",
-        "title": "Daily visits"
+        "icon": "bx bx-crown",
+        "count": "5",
+        "title": "les juryes"
     },
     {
-        "icon": "bx bx-dollar-circle",
-        "count": "$2,632",
-        "title": "Total income"
+        "icon": "bx bx-trophy",
+        "count": "7",
+        "title": "les challenges"
     },
     {
-        "icon": "bx bx-receipt",
-        "count": "1,711",
-        "title": "Total orders"
+        "icon": "bx bx-medal",
+        "count": "let's code",
+        "title": "1st equipe "
     }
 ]
