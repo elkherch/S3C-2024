@@ -1,7 +1,7 @@
 [
     {
         "display_name": "Dashboard",
-        "route": "/",
+        "route": "/dashboard",
         "icon": "bx bx-category-alt"
     },
     {
@@ -11,7 +11,7 @@
     },
     {
         "display_name": "Equipes",
-        "route": "/customers",
+        "route": "/equipe",
         "icon": "bx bx-user-pin"
     },
     {
