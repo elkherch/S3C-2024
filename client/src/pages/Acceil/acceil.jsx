@@ -1,19 +1,14 @@
 /* eslint-disable jsx-a11y/heading-has-content */
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect } from "react";
+import React, { useEffect ,useState} from "react";
 import Typed from "typed.js";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import { Container, Button,Form, Row, Col,Table, Card } from "react-bootstrap";
-
+import axios from "axios";
 import logo from "../../assets/images/logo.png";
 import "./acceil.css";
-const HomeSection = () => (
-  <div id="home">
-    <h1>Welcome to the Home Page</h1>
-    <p></p>
-  </div>
-);
+
 const scrollToId = (id) => {
   const section = document.getElementById(id);
   if (section) {
@@ -223,7 +218,43 @@ const LaodingPage = () => {
     </div>
   );
 };
-const FormSection = () => (
+const FormSection = () => {
+  const [teamData, setTeamData] = useState({
+    team_name: '',
+    slogan: '',
+    leader_email: '',
+    co_leader_email: '',
+    member_emails: Array(6).fill(''),
+  });
+
+  const handleInputChange = (key, value, index = -1) => {
+    if (index >= 0) { // Handle the array of emails
+      const updatedMembers = [...teamData.member_emails];
+      updatedMembers[index] = value;
+      setTeamData({ ...teamData, member_emails: updatedMembers });
+    } else { // Handle other inputs
+      setTeamData({ ...teamData, [key]: value });
+    }
+  };
+
+  const handleSave = async (event) => {
+    event.preventDefault(); // Prevent default form submission behavior
+    try {
+      if (!teamData.team_name.trim() || !teamData.slogan.trim() || !teamData.leader_email.trim()) {
+        alert("Please fill in all required fields.");
+        return;
+      }
+      const response = await axios.post('http://localhost:3000/teams/', teamData);
+      if (response.status === 201 || response.status === 200) {
+        console.log('Team added:', response.data);
+      } else {
+        console.error("Failed to add team:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error adding team:", error);
+    }
+  };
+  return (
     <section id="formulaire" className="form-section">
     <Container>
       <Row className="align-items-center">
@@ -234,49 +265,66 @@ const FormSection = () => (
           </div>
         </Col>
         <Col md={6}>
-          <Form>
+          <Form onSubmit={handleSave}>
           <Form.Group className="mb-3">
               <Form.Label>Nom D'equipe</Form.Label>
-              <Form.Control type="text" placeholder="Entrez Le Nom De Votre Equipe" required />
+              <Form.Control type="text"
+               value={teamData.team_name}
+               onChange={(e) => setTeamData({ ...teamData, team_name: e.target.value })}
+                placeholder="Entrez Le Nom De Votre Equipe" required />
             </Form.Group>
 
             <Form.Group className="mb-3">
               <Form.Label>Devise</Form.Label>
-              <Form.Control type="text" placeholder="Entrez votre devise" required />
+              <Form.Control type="text"
+              value={teamData.slogan}
+              onChange={(e) => setTeamData({ ...teamData, slogan: e.target.value })}
+              placeholder="Entrez votre devise" required />
             </Form.Group>
 
-            <Form.Group className="mb-3">
+            {/* <Form.Group className="mb-3">
               <Form.Label>Logo</Form.Label>
               <Form.Control type="file" accept="image/*" />
-            </Form.Group>
+            </Form.Group> */}
 
             <Form.Group className="mb-3">
               <Form.Label>Chef d'équipe</Form.Label>
-              <Form.Control type="text" placeholder="Mail du chef d'équipe" required />
+              <Form.Control type="text"
+              value={teamData.leader_email}
+              onChange={(e) => setTeamData({ ...teamData, leader_email: e.target.value })}
+               placeholder="Mail du chef d'équipe" required />
             </Form.Group>
 
             <Form.Group className="mb-3">
               <Form.Label>Co-chef d'équipe</Form.Label>
-              <Form.Control type="text" placeholder="Mail du co-chef d'équipe" required />
+              <Form.Control type="text"
+              value={teamData.co_leader_email}
+              onChange={(e) => setTeamData({ ...teamData, co_leader_email: e.target.value })}
+               placeholder="Mail du co-chef d'équipe" required />
             </Form.Group>
 
-            <Form.Label>Membres de l'équipe</Form.Label>
-            {[...Array(6)].map((_, index) => (
-              <Form.Group className="mb-3" key={index}>
-                <Form.Label>Membre {index + 1}</Form.Label>
-                <Form.Control type="text" placeholder={`Mail du membre ${index + 1}`} required={index < 4} />
-              </Form.Group>
-            ))}
+            {teamData.member_emails.map((email, index) => (
+                <Form.Group className="mb-3" key={index}>
+                  <Form.Label>Membre {index + 1}</Form.Label>
+                  <Form.Control
+                    type="email"
+                    placeholder={`Mail du membre ${index + 1}`}
+                    required={index < 4}  // Assuming the first 4 are required
+                    value={email}
+                    onChange={(e) => handleInputChange('member_emails', e.target.value, index)}
+                  />
+                </Form.Group>
+              ))}
 
-            <Button variant="primary" type="submit">
-              S'inscrire maintenant
-            </Button>
+              <Button variant="primary" type="submit">
+                S'inscrire maintenant
+              </Button>
           </Form>
         </Col>
       </Row>
     </Container>
-  </section>
-);
+  </section>);
+};
 
 const RankingSection = () => (
     <section id="classement" className="ranking-section text-center">
