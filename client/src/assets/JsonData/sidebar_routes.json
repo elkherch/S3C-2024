@@ -11,7 +11,7 @@
     },
     {
         "display_name": "Equipes",
-        "route": "/equipe",
+        "route": "/equipes",
         "icon": "bx bx-user-pin"
     },
     

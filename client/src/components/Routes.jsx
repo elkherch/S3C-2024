@@ -10,6 +10,7 @@ import Dashboardteam from '../pages/Dashbordteams'
 import Etudiant from '../pages/Etudiants/Etudiants';
 import Challenges from '../pages/Challenges/Challenges';
 import Participer_challenge from '../pages/Particuper_au_challenges/particuper_au_challenge';
+import Teams from '../pages/Teams/Teams';
 
 const Routes = () => {
     return (
@@ -44,6 +45,11 @@ const Routes = () => {
                 <Route path='/challenges'>
                     <AdminLayout>
                         <Challenges />
+                    </AdminLayout>
+                </Route>
+                <Route path='/equipes'>
+                    <AdminLayout>
+                        <Teams />
                     </AdminLayout>
                 </Route>
                 <Route path='/participer_challenge'>

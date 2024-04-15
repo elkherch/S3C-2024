@@ -1,47 +1,36 @@
+.navbar-container {
+    display: flex;
+    flex-direction: column;
+}
 
-.navbar1 {
+.navbar-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-image: url('../assets/images/back.png');
-    height: 200px;
-    padding: 5px 10px;
+    background-color: #333; /* Couleur de fond de la barre de navigation */
+    padding: 10px;
+}
+
+.navbar-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background-color: #eee; /* Couleur de fond de la partie inférieure de la barre de navigation */
 }
 
 .navbar-nav {
-    display: flex;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-.logo.sc{
-  height: 120px;
-  margin-top: 10px;
+    /* Styles pour la liste de navigation */
 }
 
-.nav-item {
-    margin-right: 3px;
-}
-
-.nav-link {
-    color: #ffffff;
-    text-decoration: none;
-
-    padding: 6px 3px;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-}
-
-.nav-link:hover {
-    color: rgba(255, 255, 255, 0.8);
-}
-
-.nav-link i {
-    margin-right: 2px;
-}
-
-.nav-link {
-    margin-left: 20px;
-    font-size: 13px;
+.logoIP {
+    background-image: url('../assets/images/back.png');
+    border: 1px solid #E0E0E0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 96px;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
