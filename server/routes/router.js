@@ -8,6 +8,7 @@ const importExcelController = require("../utils/importExcel");
 const juryController = require("../controllers/juryController");
 const envoyeEmail = require("../utils/send-email");
 const submissionsController = require("../controllers/SubmissionController");
+const passport = require("passport")
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, "uploads/"),
@@ -94,5 +95,15 @@ router.post(
   upload.single("workFile"),
   submissionsController.submitWork
 );
+
+router.get('/auth/google',
+    passport.authenticate('google', { scope: ['profile'] }));
+
+router.get('/auth/google/callback',
+    passport.authenticate('google', { failureRedirect: '/login' }),
+    function(req, res) {
+      // Successful authentication, redirect home.
+      res.redirect('/');
+    });
 
 module.exports = router;
