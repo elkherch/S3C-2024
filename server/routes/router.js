@@ -31,6 +31,8 @@ router.get("/soumission", (req, res) => res.send("You can submit your work !"));
 router.get('/users', userController.getAllUsers);
 router.post('/users', userController.createUser);
 router.get('/users/:id', userController.getUserById);
+router.get('/usersRole', userController.getUserByRole);
+
 router.put('/users/:id', userController.updateUser);
 router.delete('/users/:id', userController.deleteUser);
 
