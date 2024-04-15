@@ -1,48 +1,49 @@
-import React, {useEffect} from 'react'
-
-import './layout.css'
-
-import Sidebar from '../sidebar/Sidebar'
-import TopNav from '../topnav/TopNav'
-import Routes from '../Routes'
-
-import { BrowserRouter, Route } from 'react-router-dom'
-
-import { useSelector, useDispatch } from 'react-redux'
-
-import ThemeAction from '../../redux/actions/ThemeAction'
-
+// Layout.jsx
+import React, { useEffect } from 'react';
+import { Route, useLocation, Switch } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import ThemeAction from '../../redux/actions/ThemeAction';
+import Sidebar from '../sidebar/Sidebar';
+import TopNav from '../topnav/TopNav';
+import HomePage from '../../pages/Acceil/acceil';
+import RoutesApi from '../Routes';
 const Layout = () => {
-
-    const themeReducer = useSelector(state => state.ThemeReducer)
-
-    const dispatch = useDispatch()
+    const themeReducer = useSelector((state) => state.ThemeReducer);
+    const dispatch = useDispatch();
+    const location = useLocation();
 
     useEffect(() => {
-        const themeClass = localStorage.getItem('themeMode', 'theme-mode-light')
+        const themeClass = localStorage.getItem('themeMode', 'theme-mode-light');
+        const colorClass = localStorage.getItem('colorMode', 'theme-mode-light');
+        dispatch(ThemeAction.setMode(themeClass));
+        dispatch(ThemeAction.setColor(colorClass));
+    }, [dispatch]);
 
-        const colorClass = localStorage.getItem('colorMode', 'theme-mode-light')
-
-        dispatch(ThemeAction.setMode(themeClass))
-
-        dispatch(ThemeAction.setColor(colorClass))
-    }, [dispatch])
+    const showSidebarAndTopNav = location.pathname !== '/' && 
+                                 location.pathname !== '/login' && 
+                                 location.pathname !== '/signup' && 
+                                 location.pathname !== '/participer_challenge';
 
     return (
-        <BrowserRouter>
-            <Route render={(props) => (
+        <Route
+            render={(props) => (
                 <div className={`layout ${themeReducer.mode} ${themeReducer.color}`}>
-                    <Sidebar {...props}/>
-                    <div className="layout__content">
-                        <TopNav/>
-                        <div className="layout__content-main">
-                            <Routes/>
-                        </div>
-                    </div>
+                    {showSidebarAndTopNav && (
+                        <>
+                            <Sidebar {...props} />
+                            <div className="layout__content">
+                                <TopNav />
+                                <div className="layout__content-main">
+                                    <RoutesApi/>
+                                </div>
+                            </div>
+                        </>
+                    )}
+                    <Route path='/' exact component={HomePage}/>
                 </div>
-            )}/>
-        </BrowserRouter>
-    )
-}
+            )}
+        />
+    );
+};
 
-export default Layout
+export default Layout;

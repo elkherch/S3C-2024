@@ -22,7 +22,7 @@ const Navbar = () => (
                     <Link to="/" className="nav-link home"><i className="fas fa-house"></i>Accueil</Link>
                 </li>
                 <li className="nav-item">
-                    <Link to="/homepage" className="nav-link home"><i className="fa-solid fa-right-to-bracket"></i>Connexion</Link>
+                    <Link to="/login" className="nav-link home"><i className="fa-solid fa-right-to-bracket"></i>Connexion</Link>
                 </li>
             </ul>
         </div>
@@ -102,8 +102,7 @@ const HomePage = () => {
 
     return (
         <div className="container center-content">
-            <div className="background-overlay"></div>
-            <Navbar />
+            <Navbar /> {/* Utilisez simplement Navbar ici */}
             <div className="card-body">
                 <Countdown date="2023-12-31" />
             </div>

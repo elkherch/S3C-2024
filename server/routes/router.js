@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const path = require('path');
-
+const { auth } = require('express-oauth2-jwt-bearer');
 // Controllers
 const userController = require('../controllers/userController');
 const teamsController = require('../controllers/teamController');
@@ -22,7 +22,16 @@ const storage = multer.diskStorage({
     }
 });
 const upload = multer({ storage: storage });
-
+const jwtCheck = auth({
+    audience: 'https://challenges.mr',
+    issuerBaseURL: 'https://dev-1h6f12gkbr6jshox.us.auth0.com/',
+    tokenSigningAlg: 'RS256'
+  });
+  
+// router.use(jwtCheck);
+router.get('/authorized', function (req, res) {
+    res.send('Secured Resource');
+});
 // Basic routes
 router.get("/", (req, res) => res.send("Hello World"));
 router.get("/soumission", (req, res) => res.send("You can submit your work !"));
