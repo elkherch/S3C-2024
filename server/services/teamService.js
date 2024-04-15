@@ -13,7 +13,7 @@ class TeamService {
 
     async getAllTeams() {
         try {
-            const teams = await Teams.findAll();
+            const teams = await Teams.find();
             return teams;
         } catch (error) {
             console.error('Erreur :', error);
@@ -23,7 +23,7 @@ class TeamService {
 
     async getTeamById(teamId) {
         try {
-            const team = await Teams.findByPk(teamId);
+            const team = await Teams.findById(teamId);
             if (!team) {
                 throw new Error('Équipe non trouvée');
             }
@@ -36,28 +36,33 @@ class TeamService {
 
     async updateTeam(teamId, teamData) {
         try {
-            const team = await Teams.findByPk(teamId);
+            const team = await Teams.findByIdAndUpdate(teamId, teamData, { new: true });
             if (!team) {
                 throw new Error('Équipe non trouvée');
             }
-            await team.update(teamData);
             return team;
         } catch (error) {
-            console.error(`Erreur ${teamId} :`, error);
+            console.error(`Erreur lors de la mise à jour de l'équipe avec ID ${teamId} :`, error);
             throw error;
         }
     }
 
     async deleteTeam(teamId) {
         try {
-            const team = await Teams.findByPk(teamId);
-            if (!team) {
+            // Use an object with _id property to specify which document to delete
+            const result = await Teams.deleteOne({ _id: teamId });
+    
+            // The result object contains information about the operation
+            // result.deletedCount will be 1 if a document was deleted
+            if (result.deletedCount === 0) {
                 throw new Error('Équipe non trouvée');
             }
-            await team.destroy();
-            return team;
+    
+            // There's no need to call destroy() because the document is already deleted
+            // Return some indication that the delete was successful
+            return { message: 'Équipe supprimée avec succès' };
         } catch (error) {
-            console.error(`Erreur ${teamId} :`, error);
+            console.error(`Erreur lors de la suppression de l'équipe avec ID ${teamId} :`, error);
             throw error;
         }
     }

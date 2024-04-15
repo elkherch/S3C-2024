@@ -25,7 +25,7 @@ async function createTeams(req, res) {
 async function getTeamsById(req, res) {
   const teamId = req.params.id;
   try {
-    const team = await teamService.getTeamsById(teamId);
+    const team = await teamService.getTeamById(teamId);
     res.json(team);
   } catch (error) {
     console.error(`Error fetching team with ID ${teamId}:`, error);
@@ -37,7 +37,7 @@ async function updateTeams(req, res) {
   const teamId = req.params.id;
   const teamsData = req.body;
   try {
-    const team = await teamService.updateTeams(teamId, teamsData);
+    const team = await teamService.updateTeam(teamId, teamsData);
     res.json(team);
   } catch (error) {
     console.error(`Error updating team with ID ${teamId}:`, error);
@@ -48,7 +48,7 @@ async function updateTeams(req, res) {
 async function deleteTeams(req, res) {
   const teamId = req.params.id;
   try {
-    const team = await teamService.deleteTeams(teamId);
+    const team = await teamService.deleteTeam(teamId);
     res.json({ message: 'Team deleted successfully', team });
   } catch (error) {
     console.error(`Error deleting team with ID ${teamId}:`, error);
