@@ -1,26 +1,53 @@
-// Routes.jsx
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Dashboard from '../pages/Dashboard';
-import Challenges from '../pages/Challenges/Challenges';
-import Etudiant from '../pages/Etudiants/Etudiants';
+import AdminLayout from './layout/AdminLayout';
+import AcceuilLayout from './layout/AcceuilLayout';
+import LoginLayout from './layout/LoginLayout';
 import HomePage from '../pages/Acceil/acceil';
 import Login from '../pages/Login/login';
-import Signup from '../pages/Signup/signup';
+import Dashboard from '../pages/Dashboard';
+import Etudiant from '../pages/Etudiants/Etudiants';
+import Challenges from '../pages/Challenges/Challenges';
 import Participer_challenge from '../pages/Particuper_au_challenges/particuper_au_challenge';
 
-const RoutesApi = () => {
+const Routes = () => {
     return (
-        <Switch>
-            <Route path='/' exact element={HomePage}/>
-            <Route path='/login' exact element={Login}/>
-            <Route path='/signup' exact element={Signup}/>
-            <Route path='/participer_challenge' exact element={Participer_challenge}/>
-            <Route path='/dashboard' exact element={Dashboard}/>
-            <Route path='/etudiants' element={Etudiant}/>
-            <Route path='/challenges' element={Challenges}/>
-        </Switch>
+        <Router>
+            <Switch>
+                <Route path='/' exact>
+                    <AcceuilLayout>
+                        <HomePage />
+                    </AcceuilLayout>
+                </Route>
+                <Route path='/login' exact>
+                    <LoginLayout>
+                        <Login />
+                    </LoginLayout>
+                </Route>
+                
+                <Route path='/dashboard' exact>
+                    <AdminLayout>
+                        <Dashboard />
+                    </AdminLayout>
+                </Route>
+                <Route path='/etudiants'>
+                    <AdminLayout>
+                        <Etudiant />
+                    </AdminLayout>
+                </Route>
+                <Route path='/challenges'>
+                    <AdminLayout>
+                        <Challenges />
+                    </AdminLayout>
+                </Route>
+                <Route path='/participer_challenge'>
+                    <AcceuilLayout>
+                        <Participer_challenge />
+                    </AcceuilLayout>
+                </Route>
+            </Switch>
+        </Router>
     );
 };
 
-export default RoutesApi;
+export default Routes;
