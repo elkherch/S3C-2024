@@ -34,22 +34,50 @@ async function createChallenges(req, res) {
   }
 }
 
+
 async function sendEmailNotification(challenge, fromEmail, commenters) {
   const transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASSWORD
+      user: 'elkherchymd22025@gmail.com',
+      pass: 'qclmbpkmyxajzsbe'
     }
   });
 
+  let toEmails = [fromEmail]; // Ajoutez l'email de l'expéditeur par défaut
+
+  if (Array.isArray(commenters)) {
+    toEmails = [...toEmails, ...commenters]; // Ajoutez les commentateurs s'ils sont définis
+  } else if (commenters) {
+    toEmails.push(commenters); // Si commenters est une seule adresse email
+  }
+
+  // Vérifiez s'il y a au moins un destinataire
+  if (toEmails.length === 0) {
+    console.error('No recipients defined');
+    return; // Sortez de la fonction si aucun destinataire n'est défini
+  }
+
+  // Récupérez la description du challenge
+  const description = challenge.description || 'No description provided';
+
+  // Récupérez le nom du fichier et son URL
+  const fileName = challenge.file ? challenge.file.split('/').pop() : 'No file attached';
+  const fileUrl = challenge.file ? `<a href="${challenge.file}">${fileName}</a>` : 'No file attached';
+
+  // Construisez le contenu de l'email au format HTML
   const mailOptions = {
-    from: fromEmail, // Sender's email specified by the challenge creator
-    to: [fromEmail, ...commenters], // Include both the sender and all commenters
+    from: fromEmail,
+    to: toEmails,
     subject: 'New Challenge Submitted',
-    text: `A new challenge titled "${challenge.title}" has been submitted.`
+    html: `
+      <p>A new challenge titled "${challenge.title}" has been submitted.</p>
+      <p>Description: ${description}</p>
+      <p>Download File: ${fileUrl}</p>
+    `
   };
 
+  // Envoyer l'email
   transporter.sendMail(mailOptions, function(error, info) {
     if (error) {
       console.log(error);
@@ -58,6 +86,9 @@ async function sendEmailNotification(challenge, fromEmail, commenters) {
     }
   });
 }
+
+
+
 async function getAllChallenges(req, res) {
   try {
     const challenges = await ChallengeServices.getAllChallenges();
@@ -147,5 +178,6 @@ module.exports = {
   createChallenges,
   updateChallenges,
   deleteChallenges,
+  upload,
   importChallengesFromZip     
 };

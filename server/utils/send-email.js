@@ -1,24 +1,19 @@
 const nodemailer = require('nodemailer');
-const bodyParser = require('body-parser');
-const express = require('express');
 
-const app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 const transporter = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
-    user: 'elkherchymd22025@gmail.com',
-    pass: 'qclmbpkmyxajzsbe',   // Votre mot de passe
+    user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASSWORD
   },
 });
-async function EnvoyerEmail(req, res) {
 
-    try {
-    const { email, sujet, message} = req.body;
+async function sendEmail(req, res) {
+  try {
+    const { email, sujet, message } = req.body;
     const mailOptions = {
-      from:'22025@supnum.mr',
-      to: email,    
+      from: '22025@supnum.mr',
+      to: email,
       subject: sujet,
       text: message,
     };
@@ -31,10 +26,10 @@ async function EnvoyerEmail(req, res) {
         res.json({ success: 'E-mail envoyé avec succès' });
       }
     });
-    } catch (error) {
-        console.error('Erreur lors de l\'importation des données :', error);
-    }
+  } catch (error) {
+    console.error('Erreur lors de l\'envoi de l\'e-mail :', error);
+    res.status(500).json({ error: 'Erreur lors de l\'envoi de l\'e-mail' });
+  }
 }
 
-
-module.exports = { EnvoyerEmail };
+module.exports = { sendEmail };

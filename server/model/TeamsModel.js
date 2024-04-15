@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const User = require('./UserModels');
+const emailValidator = require('validator').isEmail;
 
 const teamSchema = new mongoose.Schema({
     team_name: {
@@ -8,28 +8,28 @@ const teamSchema = new mongoose.Schema({
         minlength: 3,
         maxlength: 100
     },
-    lead_user_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
+    leader_email: {
+        type: String,
+        required: true,
+        validate: [emailValidator, 'Please fill a valid email address']
     },
-    co_lead_user_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: false // Make it optional or required based on your needs
+    co_leader_email: {
+        type: String,
+        required: false,
+        validate: [emailValidator, 'Please fill a valid email address']
     },
-    members: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+    member_emails: [{
+        type: String,
+        validate: [emailValidator, 'Please fill a valid email address']
     }],
-    logo: {
+    slogan: {
         type: String,
-        required: false 
+        required: false
     },
-    club_name: {
-        type: String,
-        required: true
-    }
+    // logo: {
+    //     type: String,
+    //     required: false 
+    // }
 });
 
 const Team = mongoose.model('Team', teamSchema);
